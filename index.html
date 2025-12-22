@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tribunal - Registre des affaires</title>
+<title>Tribunal du Carnaval de Venise</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
@@ -22,7 +22,7 @@ body {
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    max-width: 520px;
+    max-width: 600px;
     width: 100%;
     text-align: center;
 }
@@ -62,6 +62,11 @@ button:hover {
     margin-bottom: 8px;
 }
 
+.description {
+    text-align: left;
+    white-space: pre-line;
+}
+
 hr {
     margin: 30px 0;
 }
@@ -70,9 +75,8 @@ hr {
 
 <body>
 
-<!-- PAGE ACCUEIL -->
+<!-- ACCUEIL -->
 <div class="container" id="accueil">
-
     <h2>Numéro de l'affaire à juger</h2>
     <input type="text" id="affaireInput">
 
@@ -87,10 +91,10 @@ hr {
     <div id="listeAffaires"></div>
 </div>
 
-<!-- PAGE DELIBERATION -->
+<!-- DÉLIBÉRATION -->
 <div class="container" id="deliberation" style="display:none;">
     <h2 id="titreAffaire"></h2>
-    <p id="descriptionAffaire"></p>
+    <div id="descriptionAffaire" class="description"></div>
 
     <p><strong>Veuillez réunir tous les juges pour délibération</strong></p>
 
@@ -106,10 +110,10 @@ hr {
     <button onclick="retourAccueil()">Retour</button>
 </div>
 
-<!-- PAGE JUGEMENT -->
+<!-- JUGEMENT -->
 <div class="container" id="jugement" style="display:none;">
     <h2 id="jugementTitre"></h2>
-    <p id="jugementDescription"></p>
+    <div id="jugementDescription" class="description"></div>
     <p id="jugementFamille"></p>
     <p><strong>Amende de 3MV à payer à l'un des juges.</strong></p>
     <p><em>L'affaire est définitivement jugée et aucun appel ne sera possible.</em></p>
@@ -123,12 +127,59 @@ hr {
 const matriculeCorrect = "cestmoiquidecide";
 
 const affaires = {
-    "123A": "Affaire sur un différend commercial entre deux marchands.",
-    "456B": "Affaire de fraude lors d’un contrat de transport.",
-    "789C": "Affaire de vol de biens précieux dans la cité."
+    "Profanateur_Masqué": `Lors de la nuit principale du Carnaval de Venise, un individu masqué a été surpris en train de :
+nourrir intentionnellement les pigeons de la place Saint-Marc avec des confettis parfumés au fromage,
+tout en portant un masque officiel du Carnaval… à l’envers.
+
+Pourquoi c’est grave :
+❌ Nourrir les pigeons est strictement interdit (amende élevée)
+❌ Les confettis parfumés ont provoqué une attaque massive de pigeons sur les dignitaires
+❌ Porter un masque officiel à l’envers est considéré comme une insulte aux traditions
+
+😳 Résultat : huées publiques, honte sociale et amende sont à prévoir.
+Le coupable appartient forcément à une des 3 familles.`,
+
+    "Clocher_Enthousiaste": `Lors de la nuit du Carnaval de Venise, un individu masqué est accusé d’avoir :
+actionné à plusieurs reprises la clochette décorative d’un palais privé,
+hors des horaires autorisés,
+dans le seul but de tester l’écho musical dans les ruelles.
+
+Pourquoi c’est risible mais sanctionnable :
+🔔 La clochette n’a aucune fonction officielle
+🔔 Le son a déclenché des saluts, révérences et attroupements inutiles
+🔔 Des habitants ont cru à une cérémonie inexistante
+
+😳 Gêne publique générale
+💰 Amende pour tapage et perturbation carnavalesque
+Le responsable appartient forcément à l'une des 3 familles.`,
+
+    "Rubans_Rattachés": `Lors de la grande nuit du Carnaval, un individu masqué a accompli un acte aussi absurde qu’élégant :
+Il a passé plus d’une heure à rattacher correctement les rubans défaits des masques des invités,
+permettant à des dizaines de participants de continuer à danser sans perdre leur masque toutes les deux minutes.
+
+Pourquoi c’est félicitable :
+🎭 Personne ne lui a demandé
+⏳ Il a ignoré les défilés et la musique pour se concentrer sur des nœuds
+👏 Pourtant, la soirée a été visiblement plus fluide
+
+🏅 Le Conseil du Carnaval souhaite féliciter officiellement ce “Bienfaiteur des Rubans”
+L’auteur appartient à l'une des 3 familles.`,
+
+    "Bougies_Réveillées": `Pendant la nuit du Carnaval, un individu masqué a accompli un geste aussi absurde qu’attentionné :
+Il a rallumé méthodiquement les bougies décoratives éteintes par les courants d’air,
+sur les balcons, rebords de fenêtres et tables extérieures,
+afin que la ville reste uniformément éclairée jusqu’à l’aube.
+
+Pourquoi c’est félicitable :
+🕯️ Le vent les éteignait presque aussitôt
+🕯️ L’effort était sans fin
+🕯️ Personne n’avait demandé une lumière “parfaitement continue”
+
+👏 Pourtant, l’ambiance est restée magique toute la nuit
+🏅 Le Conseil du Carnaval souhaite féliciter le “Gardien des Flammes”
+L’auteur appartient à l'une des 3 familles.`
 };
 
-// Stockage des affaires jugées
 const affairesJugees = {};
 
 /* ================= LOGIQUE ================= */
@@ -177,7 +228,8 @@ function confirmerJugement() {
 function afficherJugement(affaire) {
     jugementTitre.innerText = "Affaire : " + affaire;
     jugementDescription.innerText = affaires[affaire];
-    jugementFamille.innerText = "La famille " + affairesJugees[affaire] + " a été reconnue coupable.";
+    jugementFamille.innerText =
+        "La famille " + affairesJugees[affaire] + " a été reconnue coupable.";
 
     accueil.style.display = "none";
     deliberation.style.display = "none";
