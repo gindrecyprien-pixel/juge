@@ -1,145 +1,212 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tribunal - Accès aux affaires</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tribunal - Registre des affaires</title>
 
-        body {
-            font-family: 'EB Garamond', serif;
-            background: linear-gradient(to bottom, #f7f1e1, #e0d7c1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
-            margin: 0;
-            padding-top: 20px;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 
-        .container {
-            background-color: #fff8f0;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            margin-bottom: 30px;
-        }
+body {
+    font-family: 'EB Garamond', serif;
+    background: linear-gradient(to bottom, #f7f1e1, #e0d7c1);
+    margin: 0;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+}
 
-        h2 {
-            color: #4b3b2a;
-            margin-bottom: 10px;
-        }
+.container {
+    background: #fff8f0;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+}
 
-        input, select {
-            padding: 10px;
-            margin: 10px 0 20px 0;
-            width: 100%;
-            border-radius: 6px;
-            border: 1px solid #aaa;
-            font-size: 1rem;
-        }
+h2, h3 {
+    color: #4b3b2a;
+}
 
-        button {
-            padding: 8px 15px;
-            border-radius: 6px;
-            border: none;
-            background-color: #4b3b2a;
-            color: #fff8f0;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-left: 10px;
-        }
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+}
 
-        button:hover {
-            background-color: #392b1f;
-        }
+button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #4b3b2a;
+    color: #fff;
+    cursor: pointer;
+}
 
-        #nomAffaire {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2a1f12;
-            margin-bottom: 10px;
-        }
+button:hover {
+    background: #392b1f;
+}
 
-        #descriptionAffaire {
-            margin-bottom: 20px;
-            font-style: italic;
-        }
+.affaire-ligne {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #efe4d7;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
 
-        #debrief {
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        #jugement {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .affaireJugee {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 5px 10px;
-            background-color: #f0e4d9;
-            border-radius: 6px;
-        }
-    </style>
+hr {
+    margin: 30px 0;
+}
+</style>
 </head>
+
 <body>
-    <!-- Page 1 : Formulaire de connexion -->
-    <div class="container" id="formContainer">
-        <h2>Numéro de l'affaire à juger</h2>
-        <input type="text" id="affaireInput" placeholder="">
-        
-        <h2>Matricule du juge</h2>
-        <input type="password" id="matriculeInput" placeholder="">
-        
-        <button onclick="verifier()">Valider</button>
 
-        <hr>
-        <h3>Liste des affaires résolues :</h3>
-        <div id="listeAffairesJugees">
-            <!-- Les affaires jugées seront ajoutées ici dynamiquement -->
-        </div>
-    </div>
+<!-- PAGE ACCUEIL -->
+<div class="container" id="accueil">
 
-    <!-- Page 2 : Délibération -->
-    <div class="container" id="resultContainer" style="display:none;">
-        <h2 id="nomAffaire"></h2>
-        <div id="descriptionAffaire"></div>
-        <div id="debrief">Veuillez réunir tous les juges pour délibération</div>
-        <select id="famigliaSelect">
-            <option value="">-- Sélectionnez la Famiglia Vénitienne --</option>
-            <option value="Gondolini">Famiglia Vénitienne "Gondolini"</option>
-            <option value="Leoncini">Famiglia Vénitienne "Leoncini"</option>
-            <option value="Mascheri">Famiglia Vénitienne "Mascheri"</option>
-        </select>
-        <button onclick="confirmerJugement()">Confirmer le jugement</button>
-        <br><br>
-        <button onclick="retour()">Retour</button>
-    </div>
+    <h2>Numéro de l'affaire à juger</h2>
+    <input type="text" id="affaireInput">
 
-    <!-- Page 3 : Jugement -->
-    <div class="container" id="jugementContainer" style="display:none;">
-        <h2 id="nomAffaireJugement"></h2>
-        <div id="descriptionAffaireJugement"></div>
-        <div id="familleJugement"></div>
-        <div id="amendeJugement">Amende de 3MV à payer à l'un des juges.</div>
-        <div id="definitifJugement">L'affaire est définitivement jugée et aucun appel ne sera possible.</div>
-        <br>
-        <button onclick="retour()">Retour à l'accueil</button>
-    </div>
+    <h2>Matricule du juge</h2>
+    <input type="password" id="matriculeInput">
 
-    <script>
-        const affaires = {
-            "123A": { description: "Affaire sur un différend commercial entre deux marchands." },
-            "456B": { description: "Affaire sur une fraude lors d’un contrat de transport." },
-            "789C": { description: "Affaire de vol de biens précieux dans la ville.
+    <button onclick="verifier()">Valider</button>
+
+    <hr>
+
+    <h3>Liste des affaires résolues :</h3>
+    <div id="listeAffaires"></div>
+</div>
+
+<!-- PAGE DELIBERATION -->
+<div class="container" id="deliberation" style="display:none;">
+    <h2 id="titreAffaire"></h2>
+    <p id="descriptionAffaire"></p>
+
+    <p><strong>Veuillez réunir tous les juges pour délibération</strong></p>
+
+    <select id="famigliaSelect">
+        <option value="">-- Sélectionner une famille --</option>
+        <option value="Gondolini">Famiglia Vénitienne "Gondolini"</option>
+        <option value="Leoncini">Famiglia Vénitienne "Leoncini"</option>
+        <option value="Mascheri">Famiglia Vénitienne "Mascheri"</option>
+    </select>
+
+    <button onclick="confirmerJugement()">Confirmer le jugement</button>
+    <br><br>
+    <button onclick="retourAccueil()">Retour</button>
+</div>
+
+<!-- PAGE JUGEMENT -->
+<div class="container" id="jugement" style="display:none;">
+    <h2 id="jugementTitre"></h2>
+    <p id="jugementDescription"></p>
+    <p id="jugementFamille"></p>
+    <p><strong>Amende de 3MV à payer à l'un des juges.</strong></p>
+    <p><em>L'affaire est définitivement jugée et aucun appel ne sera possible.</em></p>
+    <br>
+    <button onclick="retourAccueil()">Retour à l'accueil</button>
+</div>
+
+<script>
+/* ================= DONNÉES ================= */
+
+const matriculeCorrect = "cestmoiquidecide";
+
+const affaires = {
+    "123A": "Affaire sur un différend commercial entre deux marchands.",
+    "456B": "Affaire de fraude lors d’un contrat de transport.",
+    "789C": "Affaire de vol de biens précieux dans la cité."
+};
+
+// Stockage des affaires jugées
+const affairesJugees = {};
+
+/* ================= LOGIQUE ================= */
+
+function verifier() {
+    const affaire = affaireInput.value.trim();
+    const matricule = matriculeInput.value.trim();
+
+    if (!affaires[affaire]) {
+        alert("Affaire inexistante.");
+        return;
+    }
+
+    if (matricule !== matriculeCorrect) {
+        alert("Matricule incorrect.");
+        return;
+    }
+
+    if (affairesJugees[affaire]) {
+        afficherJugement(affaire);
+        return;
+    }
+
+    titreAffaire.innerText = "Affaire : " + affaire;
+    descriptionAffaire.innerText = affaires[affaire];
+    famigliaSelect.value = "";
+
+    accueil.style.display = "none";
+    deliberation.style.display = "block";
+}
+
+function confirmerJugement() {
+    const affaire = titreAffaire.innerText.replace("Affaire : ", "");
+    const famille = famigliaSelect.value;
+
+    if (!famille) {
+        alert("Veuillez choisir une famille.");
+        return;
+    }
+
+    affairesJugees[affaire] = famille;
+    mettreAJourListe();
+    afficherJugement(affaire);
+}
+
+function afficherJugement(affaire) {
+    jugementTitre.innerText = "Affaire : " + affaire;
+    jugementDescription.innerText = affaires[affaire];
+    jugementFamille.innerText = "La famille " + affairesJugees[affaire] + " a été reconnue coupable.";
+
+    accueil.style.display = "none";
+    deliberation.style.display = "none";
+    jugement.style.display = "block";
+}
+
+function retourAccueil() {
+    affaireInput.value = "";
+    matriculeInput.value = "";
+
+    jugement.style.display = "none";
+    deliberation.style.display = "none";
+    accueil.style.display = "block";
+}
+
+function mettreAJourListe() {
+    listeAffaires.innerHTML = "";
+
+    for (let affaire in affairesJugees) {
+        const ligne = document.createElement("div");
+        ligne.className = "affaire-ligne";
+        ligne.innerHTML = `
+            <span>${affaire}</span>
+            <button onclick="afficherJugement('${affaire}')">Jugement</button>
+        `;
+        listeAffaires.appendChild(ligne);
+    }
+}
+</script>
+
+</body>
+</html>
