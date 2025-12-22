@@ -73,9 +73,15 @@
             margin-bottom: 20px;
             font-weight: bold;
         }
+
+        #jugement {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 <body>
+    <!-- Page 1 : Formulaire de connexion -->
     <div class="container" id="formContainer">
         <h2>Numéro de l'affaire à juger</h2>
         <input type="text" id="affaireInput" placeholder="">
@@ -86,6 +92,7 @@
         <button onclick="verifier()">Valider</button>
     </div>
 
+    <!-- Page 2 : Délibération -->
     <div class="container" id="resultContainer" style="display:none;">
         <h2 id="nomAffaire"></h2>
         <div id="descriptionAffaire"></div>
@@ -99,6 +106,17 @@
         <button onclick="confirmerJugement()">Confirmer le jugement</button>
         <br><br>
         <button onclick="retour()">Retour</button>
+    </div>
+
+    <!-- Page 3 : Jugement -->
+    <div class="container" id="jugementContainer" style="display:none;">
+        <h2 id="nomAffaireJugement"></h2>
+        <div id="descriptionAffaireJugement"></div>
+        <div id="familleJugement"></div>
+        <div id="amendeJugement">Amende de 3MV à payer à l'un des juges.</div>
+        <div id="definitifJugement">L'affaire est définitivement jugée et aucun appel ne sera possible.</div>
+        <br>
+        <button onclick="retour()">Retour à l'accueil</button>
     </div>
 
     <script>
@@ -127,10 +145,12 @@
             }
 
             if (affairesJugees[affaire]) {
-                alert("Cette affaire a déjà été jugée !");
+                // Affaire déjà jugée → afficher directement le jugement
+                afficherJugement(affaire);
                 return;
             }
 
+            // Affaire non jugée → afficher la page de délibération
             document.getElementById("nomAffaire").innerText = "Affaire : " + affaire;
             document.getElementById("descriptionAffaire").innerText = affaires[affaire].description;
             document.getElementById("famigliaSelect").value = "";
@@ -147,13 +167,27 @@
                 return;
             }
 
+            // Marquer l'affaire comme jugée
             affairesJugees[affaire] = famiglia;
-            alert("Jugement confirmé pour l'affaire " + affaire + " avec la Famiglia : " + famiglia);
+
+            afficherJugement(affaire);
+        }
+
+        function afficherJugement(affaire) {
+            document.getElementById("nomAffaireJugement").innerText = "Affaire : " + affaire;
+            document.getElementById("descriptionAffaireJugement").innerText = affaires[affaire].description;
+            document.getElementById("familleJugement").innerText = "La famille " + affairesJugees[affaire] + " a été reconnue coupable.";
+
+            // Cacher les autres conteneurs
+            document.getElementById("formContainer").style.display = "none";
+            document.getElementById("resultContainer").style.display = "none";
+            document.getElementById("jugementContainer").style.display = "block";
         }
 
         function retour() {
             document.getElementById("affaireInput").value = "";
             document.getElementById("matriculeInput").value = "";
+            document.getElementById("jugementContainer").style.display = "none";
             document.getElementById("resultContainer").style.display = "none";
             document.getElementById("formContainer").style.display = "block";
         }
