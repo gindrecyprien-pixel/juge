@@ -13,9 +13,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 100vh;
             margin: 0;
+            padding-top: 20px;
         }
 
         .container {
@@ -26,6 +27,7 @@
             text-align: center;
             max-width: 500px;
             width: 90%;
+            margin-bottom: 30px;
         }
 
         h2 {
@@ -43,14 +45,15 @@
         }
 
         button {
-            padding: 12px 25px;
+            padding: 8px 15px;
             border-radius: 6px;
             border: none;
             background-color: #4b3b2a;
             color: #fff8f0;
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-left: 10px;
         }
 
         button:hover {
@@ -78,6 +81,16 @@
             margin-bottom: 15px;
             font-size: 1.1rem;
         }
+
+        .affaireJugee {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            background-color: #f0e4d9;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
@@ -90,6 +103,12 @@
         <input type="password" id="matriculeInput" placeholder="">
         
         <button onclick="verifier()">Valider</button>
+
+        <hr>
+        <h3>Liste des affaires résolues :</h3>
+        <div id="listeAffairesJugees">
+            <!-- Les affaires jugées seront ajoutées ici dynamiquement -->
+        </div>
     </div>
 
     <!-- Page 2 : Délibération -->
@@ -123,74 +142,4 @@
         const affaires = {
             "123A": { description: "Affaire sur un différend commercial entre deux marchands." },
             "456B": { description: "Affaire sur une fraude lors d’un contrat de transport." },
-            "789C": { description: "Affaire de vol de biens précieux dans la ville." }
-        };
-        const matriculeCorrect = "cestmoiquidecide";
-
-        // Suivi des affaires déjà jugées
-        const affairesJugees = {};
-
-        function verifier() {
-            const affaire = document.getElementById("affaireInput").value.trim();
-            const matricule = document.getElementById("matriculeInput").value.trim();
-
-            if (!affaires[affaire]) {
-                alert("Affaire inexistante !");
-                return;
-            }
-
-            if (matricule !== matriculeCorrect) {
-                alert("Matricule incorrect !");
-                return;
-            }
-
-            if (affairesJugees[affaire]) {
-                // Affaire déjà jugée → afficher directement le jugement
-                afficherJugement(affaire);
-                return;
-            }
-
-            // Affaire non jugée → afficher la page de délibération
-            document.getElementById("nomAffaire").innerText = "Affaire : " + affaire;
-            document.getElementById("descriptionAffaire").innerText = affaires[affaire].description;
-            document.getElementById("famigliaSelect").value = "";
-            document.getElementById("formContainer").style.display = "none";
-            document.getElementById("resultContainer").style.display = "block";
-        }
-
-        function confirmerJugement() {
-            const affaire = document.getElementById("nomAffaire").innerText.split(" : ")[1];
-            const famiglia = document.getElementById("famigliaSelect").value;
-
-            if (!famiglia) {
-                alert("Veuillez sélectionner une Famiglia Vénitienne avant de confirmer !");
-                return;
-            }
-
-            // Marquer l'affaire comme jugée
-            affairesJugees[affaire] = famiglia;
-
-            afficherJugement(affaire);
-        }
-
-        function afficherJugement(affaire) {
-            document.getElementById("nomAffaireJugement").innerText = "Affaire : " + affaire;
-            document.getElementById("descriptionAffaireJugement").innerText = affaires[affaire].description;
-            document.getElementById("familleJugement").innerText = "La famille " + affairesJugees[affaire] + " a été reconnue coupable.";
-
-            // Cacher les autres conteneurs
-            document.getElementById("formContainer").style.display = "none";
-            document.getElementById("resultContainer").style.display = "none";
-            document.getElementById("jugementContainer").style.display = "block";
-        }
-
-        function retour() {
-            document.getElementById("affaireInput").value = "";
-            document.getElementById("matriculeInput").value = "";
-            document.getElementById("jugementContainer").style.display = "none";
-            document.getElementById("resultContainer").style.display = "none";
-            document.getElementById("formContainer").style.display = "block";
-        }
-    </script>
-</body>
-</html>
+            "789C": { description: "Affaire de vol de biens précieux dans la ville.
