@@ -14,7 +14,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
         }
 
@@ -24,7 +24,7 @@
             border-radius: 12px;
             box-shadow: 0 0 20px rgba(0,0,0,0.3);
             text-align: center;
-            max-width: 400px;
+            max-width: 500px;
             width: 90%;
         }
 
@@ -33,7 +33,7 @@
             margin-bottom: 10px;
         }
 
-        input {
+        input, select {
             padding: 10px;
             margin: 10px 0 20px 0;
             width: 100%;
@@ -61,7 +61,17 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: #2a1f12;
+            margin-bottom: 10px;
+        }
+
+        #descriptionAffaire {
             margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        #debrief {
+            margin-bottom: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -78,24 +88,67 @@
 
     <div class="container" id="resultContainer" style="display:none;">
         <h2 id="nomAffaire"></h2>
+        <div id="descriptionAffaire"></div>
+        <div id="debrief">Veuillez réunir tous les juges pour délibération</div>
+        <select id="famigliaSelect">
+            <option value="">-- Sélectionnez la Famiglia Vénitienne --</option>
+            <option value="Gondolini">Famiglia Vénitienne "Gondolini"</option>
+            <option value="Leoncini">Famiglia Vénitienne "Leoncini"</option>
+            <option value="Mascheri">Famiglia Vénitienne "Mascheri"</option>
+        </select>
+        <button onclick="confirmerJugement()">Confirmer le jugement</button>
+        <br><br>
         <button onclick="retour()">Retour</button>
     </div>
 
     <script>
-        const affaires = ["123A", "456B", "789C"];
+        const affaires = {
+            "123A": { description: "Affaire sur un différend commercial entre deux marchands." },
+            "456B": { description: "Affaire sur une fraude lors d’un contrat de transport." },
+            "789C": { description: "Affaire de vol de biens précieux dans la ville." }
+        };
         const matriculeCorrect = "cestmoiquidecide";
+
+        // Suivi des affaires déjà jugées
+        const affairesJugees = {};
 
         function verifier() {
             const affaire = document.getElementById("affaireInput").value.trim();
             const matricule = document.getElementById("matriculeInput").value.trim();
 
-            if (affaires.includes(affaire) && matricule === matriculeCorrect) {
-                document.getElementById("nomAffaire").innerText = "Affaire : " + affaire;
-                document.getElementById("formContainer").style.display = "none";
-                document.getElementById("resultContainer").style.display = "block";
-            } else {
-                alert("Affaire ou matricule incorrect !");
+            if (!affaires[affaire]) {
+                alert("Affaire inexistante !");
+                return;
             }
+
+            if (matricule !== matriculeCorrect) {
+                alert("Matricule incorrect !");
+                return;
+            }
+
+            if (affairesJugees[affaire]) {
+                alert("Cette affaire a déjà été jugée !");
+                return;
+            }
+
+            document.getElementById("nomAffaire").innerText = "Affaire : " + affaire;
+            document.getElementById("descriptionAffaire").innerText = affaires[affaire].description;
+            document.getElementById("famigliaSelect").value = "";
+            document.getElementById("formContainer").style.display = "none";
+            document.getElementById("resultContainer").style.display = "block";
+        }
+
+        function confirmerJugement() {
+            const affaire = document.getElementById("nomAffaire").innerText.split(" : ")[1];
+            const famiglia = document.getElementById("famigliaSelect").value;
+
+            if (!famiglia) {
+                alert("Veuillez sélectionner une Famiglia Vénitienne avant de confirmer !");
+                return;
+            }
+
+            affairesJugees[affaire] = famiglia;
+            alert("Jugement confirmé pour l'affaire " + affaire + " avec la Famiglia : " + famiglia);
         }
 
         function retour() {
