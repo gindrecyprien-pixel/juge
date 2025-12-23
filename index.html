@@ -386,6 +386,7 @@ L'auteur appartient à l'une des 3 familles.`
 
 const affairesJugees = {};
 let montantAmendeActuel = 3;
+let affaireCourante = "";
 
 /* ================= LOGIQUE ================= */
 
@@ -413,7 +414,7 @@ function verifier() {
         afficherJugement(affaire);
         return;
     }
-
+    affaireCourante = affaire;
     titreAffaire.innerText = "📋 Affaire : " + affaire;
     descriptionAffaire.innerText = affaires[affaire];
     famigliaSelect.value = "";
@@ -432,7 +433,7 @@ function validerFausseAmende() {
 }
 
 function confirmerJugement() {
-    const affaire = titreAffaire.innerText.replace("📋 Affaire : ", "");
+    const affaire = affaireCourante;
     const famille = famigliaSelect.value;
 
     if (!famille) {
