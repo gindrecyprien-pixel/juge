@@ -16,89 +16,21 @@ body {
     display: flex;
     justify-content: center;
     min-height: 100vh;
-    position: relative;
-}
-
-body::before {
-    content: '⚖️';
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 60px;
-    opacity: 0.15;
-    animation: float 6s ease-in-out infinite;
-}
-
-body::after {
-    content: '⚖️';
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-size: 60px;
-    opacity: 0.15;
-    animation: float 6s ease-in-out infinite reverse;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
 }
 
 .container {
     background: linear-gradient(to bottom, #2c1810, #1a0f0a);
     padding: 50px;
     border-radius: 15px;
-    box-shadow: 0 10px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(139, 69, 19, 0.2);
     max-width: 700px;
     width: 100%;
     text-align: center;
     border: 3px solid #8b6914;
-    position: relative;
-}
-
-.container::before {
-    content: '';
-    position: absolute;
-    top: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, #d4af37 0%, #8b6914 70%);
-    border-radius: 50%;
-    border: 4px solid #2c1810;
-    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.5);
-}
-
-.container::after {
-    content: '⚖️';
-    position: absolute;
-    top: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 45px;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
 }
 
 h2, h3 {
     color: #d4af37;
-    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
-    font-weight: 700;
-    letter-spacing: 2px;
     text-transform: uppercase;
-    margin-top: 40px;
-}
-
-h2 {
-    font-size: 1.8em;
-    border-bottom: 2px solid #8b6914;
-    padding-bottom: 15px;
-    margin-bottom: 25px;
-}
-
-h3 {
-    font-size: 1.3em;
-    color: #c9a961;
 }
 
 label {
@@ -106,314 +38,120 @@ label {
     color: #c9a961;
     text-align: left;
     margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 1.1em;
 }
 
 input, select {
     width: 100%;
-    padding: 14px;
-    margin: 10px 0 25px 0;
+    padding: 12px;
+    margin-bottom: 20px;
     border-radius: 8px;
     border: 2px solid #8b6914;
     background: rgba(44, 24, 16, 0.6);
     color: #d4af37;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.1em;
-    box-sizing: border-box;
-}
-
-input::placeholder {
-    color: #8b6914;
-}
-
-input:focus, select:focus {
-    outline: none;
-    border-color: #d4af37;
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
 button {
-    padding: 14px 30px;
-    border: 2px solid #8b6914;
+    padding: 12px 25px;
     border-radius: 8px;
-    background: linear-gradient(to bottom, #8b6914, #6b5010);
-    color: #fff;
+    border: 2px solid #8b6914;
+    background: #8b6914;
+    color: white;
     cursor: pointer;
-    font-family: 'EB Garamond', serif;
-    font-size: 1.1em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    font-weight: bold;
 }
 
-button:hover {
-    background: linear-gradient(to bottom, #d4af37, #8b6914);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
-    transform: translateY(-2px);
-}
-
-button:active {
-    transform: translateY(0);
+.description {
+    text-align: left;
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 10px;
+    color: #e6d9c8;
+    white-space: pre-line;
 }
 
 .affaire-ligne {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(to right, rgba(139, 105, 20, 0.3), rgba(44, 24, 16, 0.5));
-    padding: 12px 18px;
+    background: rgba(139,105,20,0.3);
+    padding: 10px;
     border-radius: 8px;
-    margin-bottom: 12px;
-    border-left: 4px solid #8b6914;
-    transition: all 0.3s ease;
-}
-
-.affaire-ligne:hover {
-    background: linear-gradient(to right, rgba(139, 105, 20, 0.5), rgba(44, 24, 16, 0.7));
-    border-left-color: #d4af37;
-}
-
-.affaire-ligne span {
-    color: #d4af37;
-    font-weight: 600;
-    font-size: 1.1em;
-}
-
-.affaire-ligne button {
-    padding: 8px 20px;
-    font-size: 0.95em;
-}
-
-.description {
-    text-align: left;
-    white-space: pre-line;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 25px;
-    border-radius: 10px;
-    border: 2px solid #8b6914;
-    color: #e6d9c8;
-    line-height: 1.8;
-    font-size: 1.05em;
-    margin: 25px 0;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-}
-
-hr {
-    margin: 40px 0;
-    border: none;
-    height: 2px;
-    background: linear-gradient(to right, transparent, #8b6914, transparent);
-}
-
-p {
-    color: #e6d9c8;
-    line-height: 1.6;
-    font-size: 1.1em;
-}
-
-strong {
-    color: #d4af37;
-    font-weight: 700;
-}
-
-em {
-    color: #c9a961;
-    font-style: italic;
-}
-
-#symbolesJugement {
-    opacity: 0.15;
-    font-size: 0.5em !important;
-    line-height: 1.2;
-    margin: 8px 0 !important;
-}
-
-#listeAffaires:empty::before {
-    content: 'Aucune affaire jugée pour le moment';
-    color: #8b6914;
-    font-style: italic;
-    display: block;
-    padding: 20px;
+    margin-bottom: 10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ACCUEIL -->
 <div class="container" id="accueil">
     <h2>⚖️ Tribunal du Carnaval ⚖️</h2>
-    
-    <label for="affaireInput">📜 Numéro de l'affaire à juger</label>
-    <input type="text" id="affaireInput" placeholder="Entrez le numéro de l'affaire">
 
-    <label for="matriculeInput">🔐 Matricule du juge</label>
-    <input type="password" id="matriculeInput" placeholder="Matricule confidentiel">
+    <label>📜 Numéro de l'affaire</label>
+    <input id="affaireInput">
 
-    <button onclick="verifier()">⚖️ Ouvrir l'audience ⚖️</button>
+    <label>🔐 Matricule du juge</label>
+    <input type="password" id="matriculeInput">
 
-    <hr>
+    <button onclick="verifier()">Ouvrir l'audience</button>
 
-    <h3>📋 Registre des affaires résolues</h3>
+    <h3>Affaires jugées</h3>
     <div id="listeAffaires"></div>
 </div>
 
-<!-- DÉLIBÉRATION -->
 <div class="container" id="deliberation" style="display:none;">
     <h2 id="titreAffaire"></h2>
-    <div id="descriptionAffaire" class="description"></div>
+    <div class="description" id="descriptionAffaire"></div>
 
-    <p><strong>⚖️ Veuillez réunir tous les juges pour délibération ⚖️</strong></p>
-
-    <label for="famigliaSelect">👥 Désignation de la famille</label>
+    <label>Famille</label>
     <select id="famigliaSelect">
-        <option value="">-- Sélectionner une famille --</option>
-        <option value="Gondolini">Famiglia Vénitienne "Gondolini"</option>
-        <option value="Leoncini">Famiglia Vénitienne "Leoncini"</option>
-        <option value="Mascheri">Famiglia Vénitienne "Mascheri"</option>
+        <option value="">-- Choisir --</option>
+        <option value="Gondolini">Gondolini</option>
+        <option value="Leoncini">Leoncini</option>
+        <option value="Mascheri">Mascheri</option>
     </select>
 
-    <button onclick="confirmerJugement()">⚖️ Prononcer le jugement ⚖️</button>
+    <button onclick="confirmerJugement()">Prononcer le jugement</button>
     <br><br>
-    <button onclick="retourAccueil()">↩️ Retour</button>
+    <button onclick="retourAccueil()">Retour</button>
 </div>
 
-<!-- JUGEMENT -->
 <div class="container" id="jugement" style="display:none;">
-    <h2>📜 Verdict officiel 📜</h2>
+    <h2>📜 Verdict 📜</h2>
     <h3 id="jugementTitre"></h3>
-    <p id="jugementFamille" style="font-size: 1.2em; margin: 25px 0;"></p>
-    <p id="symbolesJugement" style="font-size: 0.3em; margin: 15px 0;"></p>
-    <p><strong id="amendeTexte">Amende de 3MV à payer à l'un des juges.</strong></p>
-    <p><em>⚖️ L'affaire est définitivement jugée et aucun appel ne sera possible. ⚖️</em></p>
+    <p id="jugementFamille"></p>
+    <p id="amendeTexte"></p>
     <br>
-    <button onclick="retourAccueil()">↩️ Retour à l'accueil</button>
-</div>
-
-<!-- FAUSSE AMENDE -->
-<div class="container" id="fausseAmende" style="display:none;">
-    <h2>💰 Établissement d'amende 💰</h2>
-    
-    <label for="montantAmende">Montant de l'amende</label>
-    <select id="montantAmende">
-        <option value="3">3 MV</option>
-        <option value="4">4 MV</option>
-        <option value="5">5 MV</option>
-        <option value="6">6 MV</option>
-        <option value="7">7 MV</option>
-        <option value="8">8 MV</option>
-        <option value="9">9 MV</option>
-        <option value="10">10 MV</option>
-        <option value="11">11 MV</option>
-        <option value="12">12 MV</option>
-    </select>
-
-    <button onclick="validerFausseAmende()">✓ Valider</button>
-    <br><br>
-    <button onclick="retourAccueil()">↩️ Retour</button>
-</div>
-
-<!-- RÉSULTAT FAUSSE AMENDE -->
-<div class="container" id="resultatFausseAmende" style="display:none;">
-    <h2>✓ Amende confirmée ✓</h2>
-    <p id="texteAmende" style="font-size: 1.2em;"></p>
-    <br>
-    <button onclick="retourAccueil()">↩️ Retour à l'accueil</button>
+    <button onclick="retourAccueil()">Retour</button>
 </div>
 
 <script>
-/* ================= DONNÉES ================= */
-
 const matriculeCorrect = "cestmoiquidecide";
-const matriculeFausseAmende = "fausseamende";
 
 const affaires = {
-    "Profanateur_Masqué": `Lors de la nuit principale du Carnaval de Venise, un individu masqué a été surpris en train de :
-nourrir intentionnellement les pigeons de la place Saint-Marc avec des confettis parfumés au fromage,
-tout en portant un masque officiel du Carnaval… à l'envers.
-
-Pourquoi c'est grave :
-❌ Nourrir les pigeons est strictement interdit (amende élevée)
-❌ Les confettis parfumés ont provoqué une attaque massive de pigeons sur les dignitaires
-❌ Porter un masque officiel à l'envers est considéré comme une insulte aux traditions
-
-😳 Résultat : huées publiques, honte sociale et amende sont à prévoir.
-Le coupable appartient forcément à une des 3 familles.`,
-
-    "Clocher_Enthousiaste": `Lors de la nuit du Carnaval de Venise, un individu masqué est accusé d'avoir :
-actionné à plusieurs reprises la clochette décorative d'un palais privé,
-hors des horaires autorisés,
-dans le seul but de tester l'écho musical dans les ruelles.
-
-Pourquoi c'est risible mais sanctionnable :
-🔔 La clochette n'a aucune fonction officielle
-🔔 Le son a déclenché des saluts, révérences et attroupements inutiles
-🔔 Des habitants ont cru à une cérémonie inexistante
-
-😳 Gêne publique générale
-💰 Amende pour tapage et perturbation carnavalesque
-Le responsable appartient forcément à l'une des 3 familles.`,
-
-    "Rubans_Rattachés": `Lors de la grande nuit du Carnaval, un individu masqué a accompli un acte aussi absurde qu'élégant :
-Il a passé plus d'une heure à rattacher correctement les rubans défaits des masques des invités,
-permettant à des dizaines de participants de continuer à danser sans perdre leur masque toutes les deux minutes.
-
-Pourquoi c'est félicitable :
-🎭 Personne ne lui a demandé
-⏳ Il a ignoré les défilés et la musique pour se concentrer sur des nœuds
-👏 Pourtant, la soirée a été visiblement plus fluide
-
-🏅 Le Conseil du Carnaval souhaite féliciter officiellement ce "Bienfaiteur des Rubans"
-L'auteur appartient à l'une des 3 familles.`,
-
-    "Bougies_Réveillées": `Pendant la nuit du Carnaval, un individu masqué a accompli un geste aussi absurde qu'attentionné :
-Il a rallumé méthodiquement les bougies décoratives éteintes par les courants d'air,
-sur les balcons, rebords de fenêtres et tables extérieures,
-afin que la ville reste uniformément éclairée jusqu'à l'aube.
-
-Pourquoi c'est félicitable :
-🕯️ Le vent les éteignait presque aussitôt
-🕯️ L'effort était sans fin
-🕯️ Personne n'avait demandé une lumière "parfaitement continue"
-
-👏 Pourtant, l'ambiance est restée magique toute la nuit
-🏅 Le Conseil du Carnaval souhaite féliciter le "Gardien des Flammes"
-L'auteur appartient à l'une des 3 familles.`
+    "Profanateur_Masqué": "Affaire coupable",
+    "Clocher_Enthousiaste": "Affaire coupable",
+    "Rubans_Rattachés": "Affaire bienfaitrice",
+    "Bougies_Réveillées": "Affaire bienfaitrice"
 };
 
 const affairesJugees = {};
+let affaireCourante = null;
 let montantAmendeActuel = 3;
-
-/* ================= LOGIQUE ================= */
 
 function verifier() {
     const affaire = affaireInput.value.trim();
     const matricule = matriculeInput.value.trim();
 
-    if (matricule === matriculeFausseAmende) {
-        accueil.style.display = "none";
-        fausseAmende.style.display = "block";
-        return;
-    }
-
     if (!affaires[affaire]) {
-        alert("⚖️ Affaire inexistante dans le registre du tribunal.");
+        alert("Affaire inexistante");
         return;
     }
 
     if (matricule !== matriculeCorrect) {
-        alert("🔐 Matricule incorrect. Accès refusé.");
+        alert("Matricule incorrect");
         return;
     }
 
-    if (affairesJugees[affaire]) {
-        afficherJugement(affaire);
-        return;
-    }
-
+    affaireCourante = affaire;
     titreAffaire.innerText = "📋 Affaire : " + affaire;
     descriptionAffaire.innerText = affaires[affaire];
     famigliaSelect.value = "";
@@ -422,78 +160,56 @@ function verifier() {
     deliberation.style.display = "block";
 }
 
-function validerFausseAmende() {
-    const montant = montantAmende.value;
-    montantAmendeActuel = montant;
-    texteAmende.innerHTML = `<strong>Une amende de ${montant} MV a été établie.</strong><br><em>Tous les jugements suivants utiliseront ce montant.</em>`;
-    
-    fausseAmende.style.display = "none";
-    resultatFausseAmende.style.display = "block";
-}
-
 function confirmerJugement() {
-    const affaire = titreAffaire.innerText.replace("📋 Affaire : ", "");
     const famille = famigliaSelect.value;
-
     if (!famille) {
-        alert("⚖️ Veuillez désigner une famille avant de prononcer le jugement.");
+        alert("Choisissez une famille");
         return;
     }
 
-    affairesJugees[affaire] = famille;
+    affairesJugees[affaireCourante] = famille;
+    afficherJugement(affaireCourante);
     mettreAJourListe();
-    afficherJugement(affaire);
 }
 
 function afficherJugement(affaire) {
     jugementTitre.innerText = affaire;
-    
-    const affairesBienfaitrices = ["Rubans_Rattachés", "Bougies_Réveillées"];
-    const estBienfaiteur = affairesBienfaitrices.includes(affaire);
-    
+
+    const bienfaitrices = ["Rubans_Rattachés", "Bougies_Réveillées"];
+    const estBienfaiteur = bienfaitrices.includes(affaire);
+
     if (estBienfaiteur) {
-        jugementFamille.innerHTML = `<strong>🏅 La famiglia ${affairesJugees[affaire]} a été reconnue bienfaitrice du Carnaval 🏅</strong>`;
-        document.getElementById("amendeTexte").innerHTML = 
-            `💰 Les 2 autres familles doivent payer une amende de ${montantAmendeActuel}MV chacune à l'un des juges pour tentative d'appropriation d'un bienfait.`;
+        jugementFamille.innerHTML =
+            `🏅 La famiglia <strong>${affairesJugees[affaire]}</strong> est bienfaitrice du Carnaval 🏅`;
+        amendeTexte.innerText =
+            `Les autres familles paient ${montantAmendeActuel} MV chacune.`;
     } else {
-        jugementFamille.innerHTML = `<strong>⚖️ La famiglia ${affairesJugees[affaire]} a été reconnue COUPABLE ⚖️</strong>`;
-        document.getElementById("amendeTexte").innerHTML = 
-            `💰 Amende de ${montantAmendeActuel}MV à payer à l'un des juges.`;
-    }
-    
-    if (montantAmendeActuel == 3) {
-        symbolesJugement.innerHTML = "⚖️📜.📜📜.⚖️.📜⚖️.📜⚖️⚖️.⚖️<br>📜⚖️📜⚖️.📜📜📜.📜⚖️.⚖️⚖️📜⚖️.📜📜📜.⚖️📜⚖️.📜📜.⚖️";
-    } else {
-        symbolesJugement.innerHTML = "⚖️📜.📜📜.⚖️.📜⚖️.📜⚖️⚖️.⚖️<br>📜⚖️📜⚖️.⚖️⚖️📜.⚖️📜📜⚖️.⚖️⚖️.📜⚖️⚖️.⚖️";
+        jugementFamille.innerHTML =
+            `⚖️ La famiglia <strong>${affairesJugees[affaire]}</strong> est COUPABLE ⚖️`;
+        amendeTexte.innerText =
+            `Amende de ${montantAmendeActuel} MV.`;
     }
 
-    accueil.style.display = "none";
     deliberation.style.display = "none";
     jugement.style.display = "block";
 }
 
 function retourAccueil() {
-    affaireInput.value = "";
-    matriculeInput.value = "";
-
-    jugement.style.display = "none";
-    deliberation.style.display = "none";
-    fausseAmende.style.display = "none";
-    resultatFausseAmende.style.display = "none";
     accueil.style.display = "block";
+    deliberation.style.display = "none";
+    jugement.style.display = "none";
 }
 
 function mettreAJourListe() {
     listeAffaires.innerHTML = "";
-
-    for (let affaire in affairesJugees) {
-        const ligne = document.createElement("div");
-        ligne.className = "affaire-ligne";
-        ligne.innerHTML = `
-            <span>📋 ${affaire}</span>
-            <button onclick="afficherJugement('${affaire}')">📜 Voir le verdict</button>
+    for (let a in affairesJugees) {
+        const div = document.createElement("div");
+        div.className = "affaire-ligne";
+        div.innerHTML = `
+            <span>${a}</span>
+            <button onclick="afficherJugement('${a}')">Voir</button>
         `;
-        listeAffaires.appendChild(ligne);
+        listeAffaires.appendChild(div);
     }
 }
 </script>
