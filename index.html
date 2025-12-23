@@ -6,69 +6,237 @@
 <title>Tribunal du Carnaval de Venise</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap');
 
 body {
     font-family: 'EB Garamond', serif;
-    background: linear-gradient(to bottom, #f7f1e1, #e0d7c1);
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     margin: 0;
     padding: 30px;
     display: flex;
     justify-content: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+body::before {
+    content: '⚖️';
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 60px;
+    opacity: 0.15;
+    animation: float 6s ease-in-out infinite;
+}
+
+body::after {
+    content: '⚖️';
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 60px;
+    opacity: 0.15;
+    animation: float 6s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
 }
 
 .container {
-    background: #fff8f0;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    max-width: 600px;
+    background: linear-gradient(to bottom, #2c1810, #1a0f0a);
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(139, 69, 19, 0.2);
+    max-width: 700px;
     width: 100%;
     text-align: center;
+    border: 3px solid #8b6914;
+    position: relative;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #d4af37 0%, #8b6914 70%);
+    border-radius: 50%;
+    border: 4px solid #2c1810;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.5);
+}
+
+.container::after {
+    content: '⚖️';
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 45px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
 }
 
 h2, h3 {
-    color: #4b3b2a;
+    color: #d4af37;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 40px;
+}
+
+h2 {
+    font-size: 1.8em;
+    border-bottom: 2px solid #8b6914;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+h3 {
+    font-size: 1.3em;
+    color: #c9a961;
+}
+
+label {
+    display: block;
+    color: #c9a961;
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 1.1em;
 }
 
 input, select {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0 20px 0;
-    border-radius: 6px;
-    border: 1px solid #aaa;
+    padding: 14px;
+    margin: 10px 0 25px 0;
+    border-radius: 8px;
+    border: 2px solid #8b6914;
+    background: rgba(44, 24, 16, 0.6);
+    color: #d4af37;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1em;
+    box-sizing: border-box;
+}
+
+input::placeholder {
+    color: #8b6914;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
 button {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 6px;
-    background: #4b3b2a;
+    padding: 14px 30px;
+    border: 2px solid #8b6914;
+    border-radius: 8px;
+    background: linear-gradient(to bottom, #8b6914, #6b5010);
     color: #fff;
     cursor: pointer;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 button:hover {
-    background: #392b1f;
+    background: linear-gradient(to bottom, #d4af37, #8b6914);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 .affaire-ligne {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #efe4d7;
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin-bottom: 8px;
+    background: linear-gradient(to right, rgba(139, 105, 20, 0.3), rgba(44, 24, 16, 0.5));
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border-left: 4px solid #8b6914;
+    transition: all 0.3s ease;
+}
+
+.affaire-ligne:hover {
+    background: linear-gradient(to right, rgba(139, 105, 20, 0.5), rgba(44, 24, 16, 0.7));
+    border-left-color: #d4af37;
+}
+
+.affaire-ligne span {
+    color: #d4af37;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.affaire-ligne button {
+    padding: 8px 20px;
+    font-size: 0.95em;
 }
 
 .description {
     text-align: left;
     white-space: pre-line;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid #8b6914;
+    color: #e6d9c8;
+    line-height: 1.8;
+    font-size: 1.05em;
+    margin: 25px 0;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
 }
 
 hr {
-    margin: 30px 0;
+    margin: 40px 0;
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #8b6914, transparent);
+}
+
+p {
+    color: #e6d9c8;
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+
+strong {
+    color: #d4af37;
+    font-weight: 700;
+}
+
+em {
+    color: #c9a961;
+    font-style: italic;
+}
+
+#symbolesJugement {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #8b6914;
+}
+
+#listeAffaires:empty::before {
+    content: 'Aucune affaire jugée pour le moment';
+    color: #8b6914;
+    font-style: italic;
+    display: block;
+    padding: 20px;
 }
 </style>
 </head>
@@ -77,17 +245,19 @@ hr {
 
 <!-- ACCUEIL -->
 <div class="container" id="accueil">
-    <h2>Numéro de l'affaire à juger</h2>
-    <input type="text" id="affaireInput">
+    <h2>⚖️ Tribunal du Carnaval ⚖️</h2>
+    
+    <label for="affaireInput">📜 Numéro de l'affaire à juger</label>
+    <input type="text" id="affaireInput" placeholder="Entrez le numéro de l'affaire">
 
-    <h2>Matricule du juge</h2>
-    <input type="password" id="matriculeInput">
+    <label for="matriculeInput">🔐 Matricule du juge</label>
+    <input type="password" id="matriculeInput" placeholder="Matricule confidentiel">
 
-    <button onclick="verifier()">Valider</button>
+    <button onclick="verifier()">⚖️ Ouvrir l'audience ⚖️</button>
 
     <hr>
 
-    <h3>Liste des affaires résolues :</h3>
+    <h3>📋 Registre des affaires résolues</h3>
     <div id="listeAffaires"></div>
 </div>
 
@@ -96,8 +266,9 @@ hr {
     <h2 id="titreAffaire"></h2>
     <div id="descriptionAffaire" class="description"></div>
 
-    <p><strong>Veuillez réunir tous les juges pour délibération</strong></p>
+    <p><strong>⚖️ Veuillez réunir tous les juges pour délibération ⚖️</strong></p>
 
+    <label for="famigliaSelect">👥 Désignation de la famille</label>
     <select id="famigliaSelect">
         <option value="">-- Sélectionner une famille --</option>
         <option value="Gondolini">Famiglia Vénitienne "Gondolini"</option>
@@ -105,26 +276,28 @@ hr {
         <option value="Mascheri">Famiglia Vénitienne "Mascheri"</option>
     </select>
 
-    <button onclick="confirmerJugement()">Confirmer le jugement</button>
+    <button onclick="confirmerJugement()">⚖️ Prononcer le jugement ⚖️</button>
     <br><br>
-    <button onclick="retourAccueil()">Retour</button>
+    <button onclick="retourAccueil()">↩️ Retour</button>
 </div>
 
 <!-- JUGEMENT -->
 <div class="container" id="jugement" style="display:none;">
-    <h2 id="jugementTitre"></h2>
-    <p id="jugementFamille"></p>
+    <h2>📜 Verdict officiel 📜</h2>
+    <h3 id="jugementTitre"></h3>
+    <p id="jugementFamille" style="font-size: 1.2em; margin: 25px 0;"></p>
     <p id="symbolesJugement" style="font-size: 0.3em; margin: 15px 0;"></p>
-    <p><strong>Amende de 3MV à payer à l'un des juges.</strong></p>
-    <p><em>L'affaire est définitivement jugée et aucun appel ne sera possible.</em></p>
+    <p><strong id="amendeTexte">Amende de 3MV à payer à l'un des juges.</strong></p>
+    <p><em>⚖️ L'affaire est définitivement jugée et aucun appel ne sera possible. ⚖️</em></p>
     <br>
-    <button onclick="retourAccueil()">Retour à l'accueil</button>
+    <button onclick="retourAccueil()">↩️ Retour à l'accueil</button>
 </div>
 
 <!-- FAUSSE AMENDE -->
 <div class="container" id="fausseAmende" style="display:none;">
-    <h2>Quelle amende souhaitez-vous ?</h2>
+    <h2>💰 Établissement d'amende 💰</h2>
     
+    <label for="montantAmende">Montant de l'amende</label>
     <select id="montantAmende">
         <option value="3">3 MV</option>
         <option value="4">4 MV</option>
@@ -138,17 +311,17 @@ hr {
         <option value="12">12 MV</option>
     </select>
 
-    <button onclick="validerFausseAmende()">Valider</button>
+    <button onclick="validerFausseAmende()">✓ Valider</button>
     <br><br>
-    <button onclick="retourAccueil()">Retour</button>
+    <button onclick="retourAccueil()">↩️ Retour</button>
 </div>
 
 <!-- RÉSULTAT FAUSSE AMENDE -->
 <div class="container" id="resultatFausseAmende" style="display:none;">
-    <h2>Amende confirmée</h2>
-    <p id="texteAmende"></p>
+    <h2>✓ Amende confirmée ✓</h2>
+    <p id="texteAmende" style="font-size: 1.2em;"></p>
     <br>
-    <button onclick="retourAccueil()">Retour à l'accueil</button>
+    <button onclick="retourAccueil()">↩️ Retour à l'accueil</button>
 </div>
 
 <script>
@@ -212,7 +385,7 @@ L'auteur appartient à l'une des 3 familles.`
 };
 
 const affairesJugees = {};
-let montantAmendeActuel = 3; // Montant par défaut
+let montantAmendeActuel = 3;
 
 /* ================= LOGIQUE ================= */
 
@@ -220,7 +393,6 @@ function verifier() {
     const affaire = affaireInput.value.trim();
     const matricule = matriculeInput.value.trim();
 
-    // Vérifier si c'est le matricule pour fausse amende
     if (matricule === matriculeFausseAmende) {
         accueil.style.display = "none";
         fausseAmende.style.display = "block";
@@ -228,12 +400,12 @@ function verifier() {
     }
 
     if (!affaires[affaire]) {
-        alert("Affaire inexistante.");
+        alert("⚖️ Affaire inexistante dans le registre du tribunal.");
         return;
     }
 
     if (matricule !== matriculeCorrect) {
-        alert("Matricule incorrect.");
+        alert("🔐 Matricule incorrect. Accès refusé.");
         return;
     }
 
@@ -242,7 +414,7 @@ function verifier() {
         return;
     }
 
-    titreAffaire.innerText = "Affaire : " + affaire;
+    titreAffaire.innerText = "📋 Affaire : " + affaire;
     descriptionAffaire.innerText = affaires[affaire];
     famigliaSelect.value = "";
 
@@ -252,7 +424,7 @@ function verifier() {
 
 function validerFausseAmende() {
     const montant = montantAmende.value;
-    montantAmendeActuel = montant; // Mise à jour du montant global
+    montantAmendeActuel = montant;
     texteAmende.innerHTML = `<strong>Une amende de ${montant} MV a été établie.</strong><br><em>Tous les jugements suivants utiliseront ce montant.</em>`;
     
     fausseAmende.style.display = "none";
@@ -260,11 +432,11 @@ function validerFausseAmende() {
 }
 
 function confirmerJugement() {
-    const affaire = titreAffaire.innerText.replace("Affaire : ", "");
+    const affaire = titreAffaire.innerText.replace("📋 Affaire : ", "");
     const famille = famigliaSelect.value;
 
     if (!famille) {
-        alert("Veuillez choisir une famille.");
+        alert("⚖️ Veuillez désigner une famille avant de prononcer le jugement.");
         return;
     }
 
@@ -276,23 +448,19 @@ function confirmerJugement() {
 function afficherJugement(affaire) {
     jugementTitre.innerText = "Affaire : " + affaire;
     
-    // Vérifier si c'est une affaire de bienfaiteur
     const affairesBienfaitrices = ["Rubans_Rattachés", "Bougies_Réveillées"];
     const estBienfaiteur = affairesBienfaitrices.includes(affaire);
     
     if (estBienfaiteur) {
-        jugementFamille.innerText =
-            "La famille " + affairesJugees[affaire] + " a été reconnue bienfaitrice.";
-        document.querySelector("#jugement p strong").innerText = 
-            `Les 2 autres familles doivent payer une amende de ${montantAmendeActuel}MV chacune à l'un des juges pour tentative d'appropriation d'un bien fait.`;
+        jugementFamille.innerHTML = `<strong>🏅 La famiglia ${affairesJugees[affaire]} a été reconnue bienfaitrice du Carnaval 🏅</strong>`;
+        document.getElementById("amendeTexte").innerHTML = 
+            `💰 Les 2 autres familles doivent payer une amende de ${montantAmendeActuel}MV chacune à l'un des juges pour tentative d'appropriation d'un bienfait.`;
     } else {
-        jugementFamille.innerText =
-            "La famille " + affairesJugees[affaire] + " a été reconnue coupable.";
-        document.querySelector("#jugement p strong").innerText = 
-            `Amende de ${montantAmendeActuel}MV à payer à l'un des juges.`;
+        jugementFamille.innerHTML = `<strong>⚖️ La famiglia ${affairesJugees[affaire]} a été reconnue COUPABLE ⚖️</strong>`;
+        document.getElementById("amendeTexte").innerHTML = 
+            `💰 Amende de ${montantAmendeActuel}MV à payer à l'un des juges.`;
     }
     
-    // Afficher les symboles selon le montant de l'amende
     if (montantAmendeActuel == 3) {
         symbolesJugement.innerHTML = "⚖️📜.📜📜.⚖️.📜⚖️.📜⚖️⚖️.⚖️<br>📜⚖️📜⚖️.📜📜📜.📜⚖️.⚖️⚖️📜⚖️.📜📜📜.⚖️📜⚖️.📜📜.⚖️";
     } else {
@@ -322,8 +490,8 @@ function mettreAJourListe() {
         const ligne = document.createElement("div");
         ligne.className = "affaire-ligne";
         ligne.innerHTML = `
-            <span>${affaire}</span>
-            <button onclick="afficherJugement('${affaire}')">Jugement</button>
+            <span>📋 ${affaire}</span>
+            <button onclick="afficherJugement('${affaire}')">📜 Voir le verdict</button>
         `;
         listeAffaires.appendChild(ligne);
     }
