@@ -113,8 +113,8 @@ hr {
 <!-- JUGEMENT -->
 <div class="container" id="jugement" style="display:none;">
     <h2 id="jugementTitre"></h2>
-    <div id="jugementDescription" class="description"></div>
     <p id="jugementFamille"></p>
+    <p id="symbolesJugement" style="font-size: 0.3em; margin: 15px 0;"></p>
     <p><strong>Amende de 3MV à payer à l'un des juges.</strong></p>
     <p><em>L'affaire est définitivement jugée et aucun appel ne sera possible.</em></p>
     <br>
@@ -275,7 +275,6 @@ function confirmerJugement() {
 
 function afficherJugement(affaire) {
     jugementTitre.innerText = "Affaire : " + affaire;
-    jugementDescription.innerText = affaires[affaire];
     
     // Vérifier si c'est une affaire de bienfaiteur
     const affairesBienfaitrices = ["Rubans_Rattachés", "Bougies_Réveillées"];
@@ -291,6 +290,13 @@ function afficherJugement(affaire) {
             "La famille " + affairesJugees[affaire] + " a été reconnue coupable.";
         document.querySelector("#jugement p strong").innerText = 
             `Amende de ${montantAmendeActuel}MV à payer à l'un des juges.`;
+    }
+    
+    // Afficher les symboles selon le montant de l'amende
+    if (montantAmendeActuel == 3) {
+        symbolesJugement.innerText = "⚖️📜   📜📜   ⚖️   📜⚖️   📜⚖️⚖️   ⚖️   📜⚖️📜⚖️   📜📜📜   📜⚖️   ⚖️⚖️📜⚖️ 📜📜📜   ⚖️📜⚖️   📜📜   ⚖️ ⚖️📜";
+    } else {
+        symbolesJugement.innerText = "📜📜   ⚖️   📜⚖️   📜⚖️⚖️   ⚖️   📜⚖️📜⚖️   ⚖️⚖️📜   ⚖️📜📜⚖️   ⚖️⚖️   📜⚖️⚖️   ⚖️";
     }
 
     accueil.style.display = "none";
